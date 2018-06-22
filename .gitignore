@@ -1,4 +1,2 @@
-.firebaserc
-firebase.json
 /functions/node_modules/*
 /functions/lib/*
