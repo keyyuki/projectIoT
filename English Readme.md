@@ -77,3 +77,11 @@ each response has next_page_token. To get next page, using it for param pageToke
 For example, next_page_token = 23. So link to next page is https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list2?pageToken=23
 
 When no record, data will be an empty array and next_page_token='' 
+
+## 5. data fake ##
+because at fist, we don't have enought data for test, so, you can use link data test to draw data
+link is
+
+https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list-random
+
+everything is same with list API but, data is fake by random
