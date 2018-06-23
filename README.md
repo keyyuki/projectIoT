@@ -1,4 +1,4 @@
-### projectIoT ###
+# projectIoT #
 
 có các API chính sau
 1. Đẩy dữ liệu từ sensor lên server
@@ -92,7 +92,7 @@ data: 1 array chứa danh sách các dữ liệu. Tối đa 50 dữ liệu
 paginator: 
 - next_page_token: token để set cho tokenPage khi muốn lấy danh sách trang tiếp theo
 
-# cách tạo paginator #
+### cách tạo paginator ###
 mỗi response trả về có next_page_token. Để có thể lấy dữ liệu của trang tiếp theo thì dùng nó làm giá trị cho param tokenPage
 VD, next_page_token = 23. Để lấy trang tiếp theo ta chỉ cần gọi theo đường dẫn https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list2?pageToken=23
 
