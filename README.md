@@ -41,7 +41,7 @@ có thể bổ sung các param pageToken, deviceId, orderId để lọc lấy nh
 - deviceId: id của thiết bị. Dùng trong trường hợp muốn lấy danh sách dữ liệu của chỉ 1 cảm biến
 - orderId: id của đơn hàng, dùng khi muốn lấy danh sách dữ liệu của chỉ 1 đơn hàng
 
-Khi bổ sung các param này để có dữ liệu cần có, link request sẽ đổi thành
+Khi bổ sung các param này để lấy dữ liệu cần có, link request sẽ đổi thành
 ```
 https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list2?deviceid=[your deviceId]&orderId=[your orderId]&pageToken=[your pageToken]
 
