@@ -9,25 +9,32 @@ có các API chính sau
 
 ## 1. Đẩy dữ liệu từ sensor lên server ##
 Giao thức HTTPS 
+
 link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/add2
+
 phương thức: POST
+
 param:
+
 
 - q: đây là dữ liệu đẩy lên, có format [deviceId]-[orderId]-[temperature]-[doorDistance]. deviceId, orderId, temperature, doorDistance đều là số int không âm. Trong đó temperature = nhiệt độ đo được tại cảm biến + 300 để số đẩy lên luôn dương. Lên server chỉ việc trừ đi sau là dc. VD q=12-34-305-2 nghĩa là deviceId=12, orderId=34, temperature=305 (tức là thực tế là 5), doorDistance=2
 
-``
+```
 POST /temperature/add2 HTTP/1.1
 Host: us-central1-api-project-611301476725.cloudfunctions.net
 Content-Type: application/x-www-form-urlencoded
 Cache-Control: no-cache
 
 q=12-34-305-2
-``
+```
 
 ## 2. Lấy danh sách các record dữ liệu nhiệt độ và khoảng cách cửa ##
 Giao thức HTTPS 
+
 link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list2
+
 phương thức: GET
+
 
 có thể bổ sung các param pageToken, deviceId, orderId để lọc lấy những dữ liệu cần thiết
 - pageToken: đây là param để xác định paging. Đọc phần hướng dẫn phía dưới để biết cách query dữ liệu paging
@@ -35,15 +42,15 @@ có thể bổ sung các param pageToken, deviceId, orderId để lọc lấy nh
 - orderId: id của đơn hàng, dùng khi muốn lấy danh sách dữ liệu của chỉ 1 đơn hàng
 
 Khi bổ sung các param này để có dữ liệu cần có, link request sẽ đổi thành
-``
+```
 https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list2?deviceid=[your deviceId]&orderId=[your orderId]&pageToken=[your pageToken]
 
 ex:
 https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list2?deviceid=&orderId=34&pageToken=
-``
+```
 
 dữ liệu trả về là 1 chuỗi json có định dạng
-``
+```
 {
     "code": 1,
     "data": {
@@ -79,7 +86,7 @@ dữ liệu trả về là 1 chuỗi json có định dạng
         }
     }
 }
-``
+```
 Dữ liệu được sắp xếp sẵn theo thời gian từ cao -> thấp
 code: mã response trả về, 1 là thành công, 0 là thất bại.
 data: 1 array chứa danh sách các dữ liệu. Tối đa 50 dữ liệu
@@ -100,13 +107,18 @@ Khi dữ liệu hết, data sẽ là 1 array rỗng, next_page_token khi đó c�
 
 ## 3. Danh sách các đơn hàng ##
 Giao thức HTTPS 
+
 link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list-order
+
 phương thức: GET
+
 Param: pageToken
+
 maximum data per request: 50
 
+
 response:
-``
+```
 {
     "code": 1,
     "data": {
@@ -123,17 +135,22 @@ response:
         }
     }
 }
-``
+```
 
 ## 4. Lấy danh sách các thiết bị ##
 Giao thức HTTPS 
+
 link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list-device
+
 phương thức: GET
+
 Param: pageToken
+
 maximum data per request: 50
 
+
 response:
-``
+```
 {
     "code": 1,
     "data": {
@@ -149,7 +166,7 @@ response:
         }
     }
 }
-``
+```
 
 ## 5. Danh sách fake ##
 Giao thức HTTPS 
