@@ -19,5 +19,7 @@ app.use(bodyParser.json())
 
 app.post('/add', Routes.addTemp)
 app.get('/list', Routes.listTemp)
+app.post('/add2', Routes.add2)
+app.get('/list2', Routes.list2)
 
 export default app;
