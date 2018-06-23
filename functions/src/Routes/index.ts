@@ -21,5 +21,8 @@ app.post('/add', Routes.addTemp)
 app.get('/list', Routes.listTemp)
 app.post('/add2', Routes.add2)
 app.get('/list2', Routes.list2)
+app.get('/list-random', Routes.listRandom)
+app.get('/list-order', Routes.listOrder)
+app.get('/list-device', Routes.listDevice)
 
 export default app;

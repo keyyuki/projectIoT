@@ -51,7 +51,10 @@ export const add2 = async(request, response) : Promise<Boolean> => {
         const dataQ = String(request.body.q).toString().split('-');        
         const deviceId = dataQ[0]  || null;
         const orderId  = dataQ[1]  || null;
-        const tempurature = dataQ[2]  || null;
+        let tempurature =  null;        
+        if(dataQ[2]){
+            tempurature = parseInt(dataQ[2])  - 300;
+        }
         const doorDistance = dataQ[3]  || null;    
 
         // lấy ra số atIndex của record lớn nhất gần đây
@@ -78,17 +81,17 @@ export const add2 = async(request, response) : Promise<Boolean> => {
             if(!deviceExisted.exists){
                 await admin.firestore().doc('device/' + deviceId).set({
                     code: deviceId,
-                    createdDateTime: new Date()
+                    createdDateTime: new Date(),                    
                 });
             }            
         }
         if(orderId){
             const orderExisted = await admin.firestore().collection('orders').doc(orderId).get();
             if(!orderExisted.exists){
-                await admin.firestore().doc('orders/' + deviceId).set({
+                await admin.firestore().doc('orders/' + orderId).set({
                     id: orderId,
                     deviceId: deviceId,
-                    createdDateTime: new Date()
+                    createdDateTime: new Date(),                    
                 });
             }    
         }        
@@ -119,7 +122,7 @@ export const list2 = async(request: functions.Request, response) : Promise<Boole
 
     let query = admin.firestore().collection('truck-state')
         .select('tempurature', 'doorDistance', 'orderId', 'deviceId', 'createdDateTime', 'atIndex')
-        .orderBy('atIndex', 'desc').limit(2);
+        .orderBy('atIndex', 'desc').limit(50);
     
     if(deviceId){
         query = query.where('deviceId', '==', deviceId);
@@ -133,7 +136,7 @@ export const list2 = async(request: functions.Request, response) : Promise<Boole
     
     const snap = await query.get();
     const result = {
-        'filter' : request.body,
+        'filter' : request.query,
         'data': [],
         'paginator': {
             'next_page_token': ''
@@ -154,11 +157,92 @@ export const list2 = async(request: functions.Request, response) : Promise<Boole
 export const listRandom = async(request, response) =>{
     const result = [];
     for (let index = 0; index < 50; index++) {
+        const d = new Date();
+        d.setSeconds(d.getSeconds() + index);
         const element = {
             tempurature: Math.round(Math.random() * 100),
             doorDistance: Math.round(Math.random() * 10),
-            
+            orderId: 23,
+            deviceId: 40,
+            atIndex: index+1,
+            createdDateTime: d.toISOString()
         }
-        
+        result.push(element);
     }
+
+    response.send({
+        code: 1,
+        data: {
+            filter: request.query,
+            data: result,
+            'paginator': {
+                'next_page_token': 50
+            }
+        }
+    })
+    return true;
+}
+
+export const listOrder = async(request, response) =>{
+    let pageToken = null;   
+    
+    if(request.query && request.query.pageToken){
+        pageToken = request.query.pageToken;
+    }
+    let query = admin.firestore().collection('orders')    
+    .orderBy('id', 'desc').limit(50);
+    if(pageToken){        
+        query = query.where('id', '<', pageToken);
+    }
+
+    const snap = await query.get();
+    const result = {
+        'filter' : request.query,
+        'data': [],
+        'paginator': {
+            'next_page_token': ''
+        }
+    };
+    if(!snap.empty){
+        result.data = snap.docs.map(ele => {
+            return ele.data();
+        });
+
+        const lastElement = snap.docs.pop();
+        result.paginator.next_page_token = lastElement.get('id');
+    }
+    response.send({code: 1, data: result});
+    return true;
+}
+
+export const listDevice = async(request, response) =>{
+    let pageToken = null;   
+    
+    if(request.query && request.query.pageToken){
+        pageToken = request.query.pageToken;
+    }
+    let query = admin.firestore().collection('device')    
+    .orderBy('code', 'desc').limit(50);
+    if(pageToken){        
+        query = query.where('code', '<', pageToken);
+    }
+
+    const snap = await query.get();
+    const result = {
+        'filter' : request.query,
+        'data': [],
+        'paginator': {
+            'next_page_token': ''
+        }
+    };
+    if(!snap.empty){
+        result.data = snap.docs.map(ele => {
+            return ele.data();
+        });
+
+        const lastElement = snap.docs.pop();
+        result.paginator.next_page_token = lastElement.get('code');
+    }
+    response.send({code: 1, data: result});
+    return true;
 }
