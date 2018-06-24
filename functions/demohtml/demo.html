@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Demo html</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Demo jquery get</h1>
+    <script>
+        $.get('https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/list-random', function(rs) {
+            console.log('OK, request finish', rs)
+                // in chrome, press F12, click tab console to see value of varable rs
+
+            // now we have rs as data, draw chart here
+
+
+        })
+    </script>
+</body>
+
+</html>
