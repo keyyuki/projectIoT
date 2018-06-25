@@ -5,6 +5,17 @@ import * as jwt from 'jsonwebtoken';
 
 const encriptSecretKey = 'ertyuiqwbnnckza';
 
+const getUserByUserName = async(username) => {
+    const snap = await admin.firestore().collection('users')
+        .where('username', '==', username)
+        .limit(1)
+        .get();
+    if(snap.empty){
+        return null;
+    }
+    return snap.docs.shift();
+}
+
 export const registration = async(request, response) => {
     let username = request.body.username;
     let password = request.body.password;
@@ -103,13 +114,3 @@ export const login = async(request, response) => {
     return true
 }
 
-const getUserByUserName = async(username) => {
-    const snap = await admin.firestore().collection('users')
-        .where('username', '==', username)
-        .limit(1)
-        .get();
-    if(snap.empty){
-        return null;
-    }
-    return snap.docs.shift();
-}
