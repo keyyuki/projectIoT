@@ -82,11 +82,16 @@ export const login = async(request, response) => {
         })
         return false;
     }
+    const exp = moment().utc().unix() + (24*60*60);
+    const snapRef = await admin.firestore().collection('sessions').add({
+        exp: exp
+    })
 
     const token = jwt.sign({
         exp: moment().utc().unix() + (24*60*60),
         userId: user.id,
-        username: username
+        username: username,
+        sessionId: snapRef.id
     }, encriptSecretKey);
 
     response.send({

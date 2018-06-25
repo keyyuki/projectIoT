@@ -6,11 +6,12 @@ import * as admin from 'firebase-admin';
 const encriptSecretKey = 'ertyuiqwbnnckza';
 
 export const AuthenticatePlugin = async(req, res, next) => {
-    if ((!req.headers.authorization || !req.headers.authorization.startsWith('Bearer '))) {
+       
+    const idToken = req.query.accessToken;
+    if(!idToken){
         res.status(403).send({code:0, messages: ['Unauthorized']});
         return;
-    }    
-    const idToken = req.headers.authorization.split('Bearer ')[1];
+    }
     let decoded;
     try {
         decoded = jwt.verify(idToken, encriptSecretKey);
@@ -18,7 +19,15 @@ export const AuthenticatePlugin = async(req, res, next) => {
         res.status(403).send({code:0, messages: ['Invalid authentication token']});
         return;
     }
-    
+    if(!decoded.sessionId){
+        res.status(403).send({code:0, messages: ['Invalid authentication token']});
+        return;
+    }
+    const session = await admin.firestore().collection('sessions').doc(decoded.sessionId).get();
+    if(!session.exists){
+        res.status(403).send({code:0, messages: ['Invalid authentication token']});
+        return;
+    }
 
     if(decoded.exp < moment().utc().unix()){
         res.status(403).send({code:0, messages: ['Token expired']});
