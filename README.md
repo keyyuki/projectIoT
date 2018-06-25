@@ -236,4 +236,11 @@ Link lấy dữ liệu khi này là link bảo mật. Nếu chỉ bằng cách n
 
 Muốn truy cập cần có token lấy ở bước 7. Đăng nhập
 
-cần set header "authorization: Bearer " + token cho mỗi link để truy cập
+cần thêm param accessToken=[token] cho mỗi link để truy cập
+
+vd
+```
+https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth/list2?accessToken=dyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzAwMjU4MTgsInVzZXJJZCI6Ik1sa01ONXhmQWlXelEyVGwxYmd2IiwidXNlcm5hbWUiOiJraWVubm4iLCJzZXNzaW9uSWQiOiJIRXNtNUt4U0syYWJKNXI5UHlEbSIsImlhdCI6MTUyOTkzOTQxOH0.i9cUrjL2jhsxOErL-nzK2MYacnJEGP7aVsgPg0xWHCo
+```
+
+tất nhiên đây là 1 token đã hết hạn cho đến thời điểm bạn đọc bài viết này nên, haha, cố mà tạo 1 token mới đi
