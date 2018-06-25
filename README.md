@@ -174,3 +174,66 @@ link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperatur
 phương thức: GET
 
 format dữ liệu trả về giống hệt với trang danh sách thông thường, nhưng dữ liệu đều là random. 
+
+## 6. Đăng kí ##
+Giao thức HTTPS 
+
+link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/registration
+
+phương thức: POST
+
+param:
+
+- username
+- password
+- rePassword
+
+response: JSON
+
+```
+{
+    "code": 0 | 1
+}
+```
+
+## 7. Đăng nhập ##
+
+Giao thức HTTPS 
+
+link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/registration
+
+phương thức: POST
+
+param:
+
+- username
+- password
+
+response: JSON
+
+```
+{
+    "code": 1,
+    "data": {
+        "token": "an token here"
+    }
+}
+```
+
+## 8. Security ##
+Link để lấy dữ liệu 
+```
+// danh sách record
+https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth/list2
+
+// danh sách device
+https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth/list-device
+
+// danh sách đơn hàng
+https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth/list-order
+```
+Link lấy dữ liệu khi này là link bảo mật. Nếu chỉ bằng cách nhập url bình thường sẽ bị từ chối truy cập.
+
+Muốn truy cập cần có token lấy ở bước 7. Đăng nhập
+
+cần set header "authorization: Bearer " + token cho mỗi link để truy cập
