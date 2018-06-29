@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="javascript/jquery.min.js"></script>
+    <script src="javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- update the version number as needed -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="javascript/Navigo.js"></script>
+    <script src="javascript/main.js"></script>
+    <script>
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#">Project IoT </a>
+            </div>
+
+            <!--/.nav-collapse -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="logout">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="clearfix"></div>
+    <div class="container page-container" id="page-container">
+
+
+    </div>
+    <!-- /container -->
+    <div class="hide" id="templates">
+        <form class="form-signin template" id="form-signin-template">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="signin-username" class="sr-only">User name</label>
+            <input type="text" id="signin-username" class="form-control" placeholder="username" required autofocus>
+            <label for="signin-inputPassword" class="sr-only">Password</label>
+            <input type="password" id="signin-inputPassword" class="form-control" placeholder="Password" required>
+            <a class="btn btn-lg btn-primary btn-block form-signin-submit">Sign in</a>
+            <a class="btn btn-lg btn-warning btn-block signin-goto-signup" id="signin-goto-signup">Sign up</a>
+        </form>
+
+        <form class="form-signin template" id="form-signup-template">
+            <h2 class="form-signup-heading">Sign up</h2>
+            <label for="signup-username" class="sr-only">Username</label>
+            <input type="text" id="signup-username" class="form-control" placeholder="username" required autofocus>
+
+            <label for="signup-inputPassword" class="sr-only">Password</label>
+            <input type="password" id="signup-inputPassword" class="form-control" placeholder="Password" required>
+
+            <label for="signup-inputRePassword" class="sr-only">Password</label>
+            <input type="password" id="signup-inputRePassword" class="form-control" placeholder="RePassword" required>
+
+            <a class="btn btn-lg btn-warning btn-block form-signup-submit">Sign up</a>
+        </form>
+
+        <div class="list-page template" id="list-page-template">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Đồ thị</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="chart_div" style="width: 100%;height: 300px;"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Danh sách device</h3>
+                    </div>
+                    <ul class="list-group" id="list-device">
+
+                    </ul>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Danh sách order</h3>
+                    </div>
+                    <ul class="list-group" id="list-order">
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="errorModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Lỗi</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</body>
+
+</html>
