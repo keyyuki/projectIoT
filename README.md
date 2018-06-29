@@ -200,7 +200,7 @@ response: JSON
 
 Giao thức HTTPS 
 
-link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/registration
+link: https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/login
 
 phương thức: POST
 
