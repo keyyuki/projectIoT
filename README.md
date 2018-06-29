@@ -244,3 +244,6 @@ https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth
 ```
 
 tất nhiên đây là 1 token đã hết hạn cho đến thời điểm bạn đọc bài viết này nên, haha, cố mà tạo 1 token mới đi
+
+## 9. Hosting ##
+https://api-project-611301476725.firebaseapp.com
