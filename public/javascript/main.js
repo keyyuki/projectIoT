@@ -162,8 +162,9 @@ const Controller = function() {
         })
     }
     this.loadnearestTemperature = () => {
-        $.get('https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth/list-random?accessToken=' + window.localStorage.getItem('token'), (rs) => {
+        $.get('https://us-central1-api-project-611301476725.cloudfunctions.net/temperature/auth/list2?accessToken=' + window.localStorage.getItem('token'), (rs) => {
             if (rs.code != '0') {
+                this.records = {};
                 for (const record of rs.data.data) {
                     this.records[record.atIndex] = record
                 }
@@ -183,7 +184,7 @@ const Controller = function() {
         this.loadDevices();
         this.loadOrders();
         this.loadnearestTemperature();
-        this.intervalId = setInterval(() => { this.loadnearestTemperature() }, 5000)
+        this.intervalId = setInterval(() => { this.loadnearestTemperature() }, 1000 * 60)
     }
 
     this.logOut = () => {
@@ -200,7 +201,7 @@ const Controller = function() {
             ['time', 'tempurature', 'doorDistance']
         ];
         data.forEach(ele => {
-            result.push([ele.createdDateTime, parseInt(ele.tempurature), parseInt(ele.doorDistance)])
+            result.push([ele.createdDateTime.slice(10), parseInt(ele.tempurature), parseInt(ele.doorDistance)])
         });
         console.log(result);
         return result;
@@ -219,7 +220,7 @@ const Controller = function() {
                 1: {
                     title: 'Cửa',
                     viewWindow: {
-                        max: 10,
+                        max: 2,
                         min: 0
                     },
 
