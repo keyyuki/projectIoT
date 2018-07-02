@@ -184,11 +184,11 @@ const Controller = function() {
         this.loadDevices();
         this.loadOrders();
         this.loadnearestTemperature();
-        this.intervalId = setInterval(() => { this.loadnearestTemperature() }, 1000 * 60)
+        //this.intervalId = setInterval(() => { this.loadnearestTemperature() }, 1000 * 60)
     }
 
     this.logOut = () => {
-        clearInterval(this.intervalId);
+        //clearInterval(this.intervalId);
         window.localStorage.removeItem('token')
         router.navigate('/login')
     }
